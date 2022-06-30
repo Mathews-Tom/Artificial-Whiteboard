@@ -2,10 +2,6 @@
 
 ![Artificial Whiteboard](images/Artificial_Whiteboard_OG.jpeg)
 
-## This is a title
+## Artificial Whiteboard
 
-And you can include links, like this [link to fast.ai](https://www.fast.ai). Posts will appear after this file. 
-
-
-
-Hello and welcome to this blog. Edit the `index.md` file to change this content. All pages on the blog, including this one, use [Markdown](https://guides.github.com/features/mastering-markdown/). You can include images:
+Artificial Whiteboard is a platform for sharing information, experience, tips and tricks related to anything and everything about Machine Learning and Artificial Intelligence. Please feel free to reach out to me with any corrections, suggestions or requests for future posts or contributions to this project.
