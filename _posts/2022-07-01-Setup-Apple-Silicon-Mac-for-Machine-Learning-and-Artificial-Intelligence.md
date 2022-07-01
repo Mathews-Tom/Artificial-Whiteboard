@@ -5,30 +5,18 @@ Contents:
 1. TOC
    {:toc}
 
-# M1, M1 Pro, M1 Max Machine Learning Speed Test Comparison
+## Who is this for?
 
-This repo contains some sample code to benchmark the new M1 MacBooks (M1 Pro and M1 Max) against various other pieces of hardware.
-
-It also has steps below to setup your M1, M1 Pro and M1 Max (steps should also for work Intel) Mac to run the code.
-
-## Who is this repo for?
-
-**You:** have a new M1, M1 Pro, M1 Max machine and would like to get started doing machine learning and data science on it.
-
-**This repo:** teaches you how to install the most common machine learning and data science packages (software) on your machine and make sure they run using sample code.
-
-## Steps (how to test your M1 machine)
-
-1. Create an environment and install dependencies ([see below](https://github.com/mrdbourke/m1-machine-learning-test#how-to-setup-a-tensorflow-environment-on-m1-m1-pro-m1-max-using-miniforge-shorter-version))
-2. Clone this repo
-3. Run various notebooks (results come at the end of the notebooks)
+You: have a new Apple Silicon machine and would like to get started doing machine learning and data science on it. This article teaches you how to install the most common machine learning and data science packages (software) on your machine and make sure they run using sample code.
 
 ## How to setup a TensorFlow environment on Apple Silicon using Miniforge (shorter version)
 
 If you're experienced with making environments and using the command line, follow this version. If not, see the longer version below. 
 
 1. Download and install Homebrew from https://brew.sh. Follow the steps it prompts you to go through after installation.
+
 2. [Download Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) (Conda installer) for macOS Apple Silicon ARM64 chips.
+
 3. Install Miniforge3 into home directory.
    
    ```shell
@@ -36,49 +24,59 @@ If you're experienced with making environments and using the command line, follo
    sh ~/Downloads/Miniforge3-MacOSX-arm64.sh
    source ~/miniforge3/bin/activate
    ```
+
 4. Restart terminal.
+
 5. Create a directory to setup TensorFlow environment.
    
    ```shell
    mkdir tensorflow-test
    cd tensorflow-test
    ```
+
 6. Make and activate Conda environment. **Note:** Python 3.8 is the most stable for using the following setup.
    
    ```shell
    conda create --prefix ./env python=3.8
    conda activate ./env
    ```
+
 7. Install TensorFlow dependencies from Apple Conda channel.
    
    ```shell
    conda install -c apple tensorflow-deps
    ```
+
 8. Install base TensorFlow (Apple's fork of TensorFlow is called `tensorflow-macos`).
    
    ```shell
    python -m pip install tensorflow-macos
    ```
+
 9. Install Apple's `tensorflow-metal` to leverage Apple Metal (Apple's GPU framework) for Apple Silicon GPU acceleration.
    
    ```shell
    python -m pip install tensorflow-metal
    ```
+
 10. (Optional) Install TensorFlow Datasets to run benchmarks included in this repo.
     
     ```shell
     python -m pip install tensorflow-datasets
     ```
+
 11. Install common data science packages.
     
     ```shell
     conda install jupyter pandas numpy matplotlib scikit-learn
     ```
+
 12. Start Jupyter Notebook.
     
     ```shell
     jupyter notebook
     ```
+
 13. Import dependencies and check TensorFlow version/GPU access.
     
     ```python
@@ -99,14 +97,14 @@ If you're experienced with making environments and using the command line, follo
 
         If it all worked, you should see something like: 
 
-> ```shell
-> TensorFlow version: 2.9.2
-> TensorFlow has access to the following devices: [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU'), PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
-> ```
+```shell
+TensorFlow version: 2.9.2
+TensorFlow has access to the following devices: [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU'), PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+```
 
 ## How to setup a TensorFlow environment on Apple Silicon using Miniforge (longer version)
 
-If you're new to creating environments, using a new M1, M1 Pro, M1 Max machine and would like to get started running TensorFlow and other data science libraries, follow the below steps.
+If you're new to creating environments, using a Apple Silicon machine and would like to get started running TensorFlow and other data science libraries, follow the below steps.
 
 > **Note:** You're going to see the term "package manager" a lot below. Think of it like this: a **package manager** is a piece of software that helps you install other pieces (packages) of software.
 
@@ -241,7 +239,7 @@ Depending on your internet connection the above may take a few minutes since Ten
 
 Why?
 
-Machine learning models often benefit from GPU acceleration. And the M1, M1 Pro and M1 Max chips have quite powerful GPUs.
+Machine learning models often benefit from GPU acceleration. And the Apple Silicon chips have quite powerful GPUs.
 
 TensorFlow allows for automatic GPU acceleration if the right software is installed.
 
