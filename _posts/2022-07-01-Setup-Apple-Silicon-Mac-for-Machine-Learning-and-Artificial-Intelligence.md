@@ -1,10 +1,5 @@
 # Setup Apple Silicon Mac for Machine Learning and Artificial Intelligence
 
-Contents:
-
-1. TOC
-   {:toc}
-
 ## Who is this for?
 
 You: have a new Apple Silicon machine and would like to get started doing machine learning and data science on it. This article teaches you how to install the most common machine learning and data science packages (software) on your machine and make sure they run using sample code.
