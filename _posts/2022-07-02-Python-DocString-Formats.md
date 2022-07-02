@@ -1,4 +1,6 @@
-# Introduction
+# Python DocString Formats
+
+## Introduction
 
 It's important for a project to have a good documentation, or, at least, a documentation. Especially concerning a library, or a module to be integrated in other programs. The user should have access to a description of functions and their parameters.
 
