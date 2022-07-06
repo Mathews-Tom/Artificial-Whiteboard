@@ -62,40 +62,45 @@ def run_cmd(cmd, verbose=False, *args, **kwargs) -> None:
     if verbose:
         print(std_out.strip(), std_err)
 
-def download_kaggle_dataset(competition: str, kaggle_config_file: str="", is_file_in_drive: bool=True) -> None:
+
+def configure_kaggle(config_file: str=""):
+    """
+    Configure Kaggle CLI
+
+    Args:
+        config_file (str): Kaggle config JSON file path
+    """    
+    import sys
+    from google.colab import drive
+
+    if not config_file:
+        kaggle_config_file = "MyDrive/.kaggle/kaggle.json"
+
+    KAGGLE_CONFIG = "~/.kaggle/kaggle.json"
+    dir_path = os.path.dirname(os.path.realpath(KAGGLE_CONFIG))
+    run_cmd(f"mkdir -p {dir_path}")    
+    if "MyDrive" in config_file:
+        print("Found a Goolge Drive path, connecting to Google drive")
+        drive.mount("/content/google_drive", force_remount=True)
+        run_cmd(f"cp /content/google_drive/{config_file} {KAGGLE_CONFIG}")
+        drive.flush_and_unmount()
+    else:
+        run_cmd(f"cp {config_file} {KAGGLE_CONFIG}")
+     
+    print("Configured Kaggle")
+
+
+def download_kaggle_dataset(competition: str, kaggle_config_file: str="") -> None:
     """
     Download kaggle competition datasets.
-    Args
+    Args:
         competition (str): Kaggle comptetiton name
         kaggle_config_file (str): Kaggle config json file path
                                     Default is empty which would be internally be 
-                                    treated as google drive location under "MyDrive/kaggle/kaggle.json"
-        is_file_in_drive (bool): Is the config file in local or Google Drive.
-                                    Default option is True, i.e., config file is Google Drive
-    """
-    def config_kaggle(config_file: str, is_drive: bool):
-        import sys
-
-        KAGGLE_CONFIG_LOCATION = "~/.kaggle/kaggle.json"
-        run_cmd("mkdir -p ~/.kaggle")
-
-        if 'google.colab' in sys.modules:
-            from google.colab import drive    
-            if "MyDrive" in config_file and is_drive:
-                print("Found a Goolge Drive path, connecting to Google drive")
-                drive.mount("/content/gdrive", force_remount=True)
-                run_cmd(f"cp /content/gdrive/{config_file} {KAGGLE_CONFIG_LOCATION}")
-                drive.flush_and_unmount()
-            else:
-                run_cmd(f"cp {config_file} {KAGGLE_CONFIG_LOCATION}")
-        else:
-            run_cmd(f"cp {config_file} {KAGGLE_CONFIG_LOCATION}")
-        
-        print("Configured Kaggle")
-
-        
+                                    treated as google drive location under "MyDrive/.kaggle/kaggle.json"
+    """        
     if not kaggle_config_file:
-        kaggle_config_file = "MyDrive/kaggle/kaggle.json"
+        kaggle_config_file = "MyDrive/.kaggle/kaggle.json"
     config_kaggle(kaggle_config_file, is_file_in_drive)
     print(f"Downloading dataset for the competetion \"{competition}\" from Kaggle")
     run_cmd(f"kaggle competitions download -c {competition}")
